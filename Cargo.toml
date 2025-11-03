@@ -22,7 +22,7 @@ walkdir = "2.5"
 
 # Test CLI Applications
 # https://crates.io/crates/assert_cmd
-assert_cmd = "2.0"
+assert_cmd = "2.1"
 
 [[bin]]
 name = "filecounter"
