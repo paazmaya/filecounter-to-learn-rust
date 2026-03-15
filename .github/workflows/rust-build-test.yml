@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Install Rust
         run: rustup update stable
@@ -26,10 +26,14 @@ jobs:
       - name: Run clippy
         run: cargo clippy -- -D warnings
 
-      - name: Install tarpaulin
-        # A code coverage tool for Rust projects
-        # https://github.com/xd009642/tarpaulin
-        run: cargo install cargo-tarpaulin
+      # https://github.com/cargo-bins/cargo-binstall
+      - name: Install binary installation tool for cargo
+        uses: cargo-bins/cargo-binstall@main
+
+      # https://github.com/xd009642/tarpaulin
+      - name: Install code coverage tool
+        run: cargo binstall cargo-tarpaulin
+        # Install takes a bit over 4 mins, while binstall 12 seconds
 
       - name: Measure code coverage
         run: cargo tarpaulin --out Xml
